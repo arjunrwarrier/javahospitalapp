@@ -168,6 +168,20 @@ public class hospital {
                     break;
                 case 5:
                     System.out.println("Delete Patient");
+                    System.out.println("Enter the Patient Id : ");
+                    patientId = input.nextInt();
+
+                    try {
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitaldb", "root", "");
+                        String sql = "DELETE FROM `patients` WHERE `patientid` = " + patientId;
+                        Statement stmt = con.createStatement();
+                        stmt.executeUpdate(sql);
+                        System.out.println("Patient Data deleted successfully.");
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
 
 
                     break;
