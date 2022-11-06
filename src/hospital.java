@@ -66,6 +66,35 @@ public class hospital {
                     break;
                 case 2:
                     System.out.println("View all Patients");
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitaldb","root","");
+                        String sql = "SELECT `patientid`, `name`, `address`, `pincode`, `phone`, `symptoms`, `docname` FROM `patients`";
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(sql);
+                        while (rs.next()){
+                            String getPatientId = rs.getString("patientid");
+                            String getPatientName = rs.getString("name");
+                            String getPatientAddress = rs.getString("address");
+                            String getPin = rs.getString("pincode");
+                            String getPatientPhone = rs.getString("phone");
+                            String getPatientSymptoms = rs.getString("symptoms");
+                            String getPatientDoc =rs.getString("docname");
+
+                            System.out.println("Patient Id="+getPatientId);
+                            System.out.println("Patient Name="+getPatientName);
+                            System.out.println("Patient Address="+getPatientAddress);
+                            System.out.println("Patient Pincode="+getPin);
+                            System.out.println("Patient Phone="+getPatientPhone);
+                            System.out.println("Patient Symptoms="+getPatientSymptoms);
+                            System.out.println("Patients Doctor="+getPatientDoc+"\n");
+
+                        }
+
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
 
                     break;
                 case 3:
