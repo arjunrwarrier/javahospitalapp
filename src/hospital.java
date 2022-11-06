@@ -27,6 +27,39 @@ public class hospital {
             switch (choice){
                 case 1:
                     System.out.println("Add a Patient");
+                    System.out.println("Enter Patient ID: ");
+                    patientId = input.nextInt();
+                    System.out.println("Enter Patient Name: ");
+                    patientName = input.next();
+                    System.out.println("Enter patient address: ");
+                    patientAddress = input.next();
+                    System.out.println("Enter pincode: ");
+                    patientPincode = input.nextInt();
+                    System.out.println("Enter patient phone: ");
+                    patientPhone = input.next();
+                    System.out.println("Enter patients symptoms: ");
+                    patientSymptoms = input.next();
+                    System.out.println("Enter doctors name: ");
+                    patientsDoctor = input.next();
+
+                    try {
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospitaldb","root","");
+                        String sql = "INSERT INTO `patients`(`patientid`, `name`, `address`, `pincode`, `phone`, `symptoms`, `docname`)VALUES (?,?,?,?,?,?,?)";
+                        PreparedStatement stmt = con.prepareStatement(sql);
+                        stmt.setInt(1,patientId);
+                        stmt.setString(2,patientName);
+                        stmt.setString(3,patientAddress);
+                        stmt.setInt(4,patientPincode);
+                        stmt.setString(5,patientPhone);
+                        stmt.setString(6,patientSymptoms);
+                        stmt.setString(7,patientsDoctor);
+                        stmt.executeUpdate();
+                    }
+                    catch (Exception e ){
+                        System.out.println(e);
+                    }
+
 
 
 
